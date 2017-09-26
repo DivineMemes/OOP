@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="effects.cpp" />
     <ClCompile Include="Line.cpp" />
@@ -133,6 +134,7 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Box.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="effects.h" />
     <ClInclude Include="Line.h" />

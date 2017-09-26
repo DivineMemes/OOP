@@ -3,6 +3,7 @@
 class Line
 {
 public:
+	Line();
 	float startX;   // start-position on the x-axis
 	float startY;   // start-position on the y-axis
 
