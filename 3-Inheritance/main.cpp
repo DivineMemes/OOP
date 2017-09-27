@@ -6,6 +6,8 @@
 #include "sfwdraw.h"
 #include "BaseParticle.h"
 #include "MouseFunctions.h"
+#include "MouseLineDraw.h"
+#include "LineDrawer.h"
 int main()
 {
 	/*
@@ -26,7 +28,10 @@ int main()
 	meme.TextureHandle = imgMeme;
 	meme.x = 400;
 	meme.y = 300;
-
+	
+	LineDrawer lines[500];
+	MouseLineDraw mouse;
+	mouse.currentLine = &lines[0];
 	//BaseParticle particle;
 	//particle.player = &meme;
 
@@ -35,7 +40,7 @@ int main()
 	
 	while(sfw::stepContext()) 
 	{
-		
+		mouse.update(lines, 500);
 		//follow for follower
 		/*
 		followTime -= sfw::getDeltaTime();
@@ -51,11 +56,24 @@ int main()
 
 		particle.PTextureHandle = imgParticle;
 		*/
+		
 
 		meme.draw();
 		meme.update();
 		
 		MouseDrawLine(meme);
+		MouseDrawPoint();
+		DrawMouse();
+		meme.ThePlayerScreenWrap();
+		
+		
+
+		for (int i = 0; i < 500; i++)
+		{
+			lines[i].draw();
+
+			
+		}
 
 		//particle.draw();
 		//particle.update();

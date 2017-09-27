@@ -7,3 +7,5 @@
 //ThePlayer*player;
 
 void MouseDrawLine(ThePlayer p);
+void MouseDrawPoint();
+void DrawMouse();

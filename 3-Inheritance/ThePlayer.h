@@ -9,5 +9,6 @@ public:
 	unsigned int TextureHandle;
 	virtual void update() override;
 	virtual void draw() override;
+	void ThePlayerScreenWrap();
 	void ThePlayerControls();
 };
