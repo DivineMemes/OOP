@@ -23,6 +23,7 @@
     <ClCompile Include="BaseParticle.cpp" />
     <ClCompile Include="Gameobject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouseFunctions.cpp" />
     <ClCompile Include="Officer.cpp" />
     <ClCompile Include="ThePlayer.cpp" />
   </ItemGroup>
@@ -30,6 +31,7 @@
     <ClInclude Include="Aperson.h" />
     <ClInclude Include="BaseParticle.h" />
     <ClInclude Include="Gameobject.h" />
+    <ClInclude Include="MouseFunctions.h" />
     <ClInclude Include="Officer.h" />
     <ClInclude Include="ThePlayer.h" />
   </ItemGroup>
