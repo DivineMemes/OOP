@@ -2,7 +2,6 @@
 #include "sfwdraw.h"
 #include "Effects.h"
 #include <iostream>
-unsigned int TextureHandle;
 TheRealPlayer::TheRealPlayer()
 {
 	for (int i = 0; i < 20; i++)
@@ -10,16 +9,15 @@ TheRealPlayer::TheRealPlayer()
 		bullet[i].enabled = false;
 	}
 }
+
 void TheRealPlayer::update(MyMouse mouse)
 {
 	if (mouse.MouseIsDown())
 	{
-		//std::cout << "Mouse Click";
 		for (int i = 0; i < 20; i++)
 		{
 			if (bullet[i].enabled == false)
 			{
-				
 				bullet[i].xPos = x;
 				bullet[i].yPos = y;
 				bullet[i].speedX = 3;
@@ -27,28 +25,19 @@ void TheRealPlayer::update(MyMouse mouse)
 				bullet[i].radius =  5;
 				bullet[i].lifetime = 5;
 				bullet[i].enabled = true;
-				
 				break;
 			}
 		}
 	}
-
 	for (int i = 0; i < 20; i++)
 	{
 		if (bullet[i].enabled == true)
 		{
-			
-			/*if (bullet[i].lifetime >= 5)
-			{
-				bullet[i].enabled = false;
-			}*/
-			
-			
-			bullet[i].bulletUpdate(mouse);
-			
+			bullet[i].bulletUpdate(mouse);	
 		}
 	}
 }
+
 void TheRealPlayer::draw()
 {
 	sfw::drawCircle(x, y, radius, 100, RandomColors());

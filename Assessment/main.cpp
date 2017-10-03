@@ -8,24 +8,41 @@
 #include <ctime>
 #include <cmath>
 #include "bullet.h"
-bool checkCollision(TheRealPlayer& player, Enemy &enemy)
+bool checkCollisionPE(TheRealPlayer& player, Enemy &enemy)
 {
 	// do some math in here to figure out if they are colliding
-	float xSquared = pow(enemy.posX - player.x, 2);
-	float ySquared = pow(enemy.posY - player.y, 2);
-	float distance = sqrt(xSquared + ySquared);
-	
-	if (player.radius + enemy.radius > distance)
+	float xSquaredPE = pow(enemy.posX - player.x, 2);
+	float ySquaredPE = pow(enemy.posY - player.y, 2);
+	float distancePE = sqrt(xSquaredPE + ySquaredPE);
+
+	if (player.radius + enemy.radius > distancePE)
 	{
 		return true;
 	}
-	if (player.radius + enemy.radius < distance)
+	if (player.radius + enemy.radius < distancePE)
 	{
 		return false;
 	}
+}
+	bool checkCollisionBE(Bullet& bullet, Enemy &enemy)
+	{
+		// do some math in here to figure out if they are colliding
+		float xSquaredBE = pow(bullet.xPos - enemy.posX, 2);
+		float ySquaredBE = pow(bullet.yPos - enemy.posY, 2);
+		float distanceBE = sqrt(xSquaredBE + ySquaredBE);
+
+		if (bullet.radius + enemy.radius > distanceBE)
+		{
+			return true;
+		}
+		if (bullet.radius + enemy.radius < distanceBE)
+		{
+			return false;
+		}
+	}
 	// return true if they are
 	// return false if they aren't
-}
+
 bool notDead = true;
 int main()
 {
@@ -90,18 +107,35 @@ int main()
 
 			for (int i = 0; i < 10; ++i)
 			{
-				// did collision occur?
-				if (checkCollision(player, army[i]) == true)
+				if (army[i].enabled == true)
 				{
+					if (checkCollisionPE(player, army[i]) == true)
+					{
 
-					// yass, okay, what now?
-					notDead = false;
+						// yass, okay, what now?
+						notDead = false;
 
+					}
+				}
+				// did collision occur?
+				
+			}
+			for (int i = 0; i < 20; ++i)
+			{
+				if (player.bullet[i].enabled)
+				{
+					for (int j = 0; j < 10; ++j)
+					{
+						if (checkCollisionBE(player.bullet[i], army[j]))
+						{
+							army[j].enabled = false;
+						}
+					}
 				}
 			}
 
 		}
-		if (notDead == false)
+		else if (notDead == false)
 		{
 			std::cout << "YOU LOSE" << std::endl;
 		}

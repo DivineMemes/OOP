@@ -12,7 +12,6 @@ public:
 	float x;
 	float y;
 	float radius;
-	unsigned int TextureHandle;
 	void update(MyMouse mouse);
 	virtual void draw() override;
 	void ThePlayerScreenWrap();

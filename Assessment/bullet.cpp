@@ -26,8 +26,6 @@ void Bullet::bulletUpdate(MyMouse mouse)
 	{
 		enabled = false;
 	}
-
-	
 	std::cout << lifetime;
 	if (xPos <= mouse.savedPosX)
 	{
