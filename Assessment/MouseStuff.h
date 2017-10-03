@@ -1,5 +1,5 @@
 #pragma once
-#include "TheRealPlayer.h"
+
 class MyMouse
 {
 public:
@@ -10,6 +10,9 @@ public:
 	float mY;
 	float prevmX;
 	float prevmY;
+	float savedPosX;
+	float savedPosY;
 	void Cursor();
-	float onMouseDown();
+	float OnMouseDown();
+	bool MouseIsDown();
 };

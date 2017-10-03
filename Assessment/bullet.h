@@ -1,14 +1,21 @@
 #pragma once
-class Bullet
+
+#include "MouseStuff.h"
+class Bullet 
 {
 
 public:
-	bool enabled = true;
+	Bullet();
+	bool enabled;
+	
+	float lifetime;
 
 	float xPos;
 	float yPos;
+	float speedX;
+	float speedY;
 	int radius;
 
-	void bulletDraw(TheRealPlayer player);
+	void bulletDraw();
 	void bulletUpdate(MyMouse mouse);
 };

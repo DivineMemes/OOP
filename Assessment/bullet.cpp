@@ -1,15 +1,48 @@
 #include "bullet.h"
 #include "sfwdraw.h"
-#include "MouseStuff.h"
-#include "TheRealPlayer.h"
+#include "glm\glm.hpp"
+#include <iostream>
 
 
-void Bullet::bulletDraw(TheRealPlayer player)
+
+
+Bullet::Bullet()
 {
-	sfw::drawCircle(player.x, player.y, player.radius);
+	
+}
+
+void Bullet::bulletDraw()
+{
+	//xPos = player.x;
+	//yPos = player.y;
+	sfw::drawCircle(xPos, yPos, radius);
+
 }
 
 void Bullet::bulletUpdate(MyMouse mouse)
 {
-	mouse.onMouseDown();
+	lifetime -= sfw::getDeltaTime();
+	if (lifetime <= 0)
+	{
+		enabled = false;
+	}
+
+	
+	std::cout << lifetime;
+	if (xPos <= mouse.savedPosX)
+	{
+		xPos += speedX;
+	}
+	if (xPos >= mouse.savedPosX)
+	{
+		xPos -= speedX;
+	}
+	if (yPos <= mouse.savedPosY)
+	{
+		yPos += speedY;
+	}
+	if (yPos >= mouse.savedPosY)
+	{
+		yPos -= speedY;
+	}
 }

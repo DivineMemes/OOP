@@ -2,8 +2,7 @@
 #include "sfwdraw.h"
 #include <iostream>
 #include <windows.h>
-#include "ParticleEmitter.h"
-#include "TheRealPlayer.h"
+
 
 MyMouse::MyMouse()
 {
@@ -16,11 +15,33 @@ void MyMouse::Cursor()
 	sfw::drawCircle(mX, mY, 1, 100);
 }
 
-float MyMouse::onMouseDown()
+float MyMouse::OnMouseDown()
 {
-	
+	if (sfw::getMouseButton(0))
+	{
+		action = true;
+		isDown = true;
+		//Button is held down
+	}
+	else
+	{
+		isDown = false;
+		prevmX = sfw::getMouseX();
+		prevmY = sfw::getMouseY();
+		//Button is held up
+	}
+	if (action == true && isDown == false)
+	{
+		savedPosX = prevmX;
+		savedPosY = prevmY;
+		action = false;
+		
+	}
+	return (savedPosX, savedPosY);
+}
 
-
+bool MyMouse::MouseIsDown()
+{
 	if (sfw::getMouseButton(0))
 	{
 		action = true;
@@ -38,9 +59,9 @@ float MyMouse::onMouseDown()
 
 	if (action == true && isDown == false)
 	{
-		action = false;
+		std::cout << "Click";
+		return true;
 	}
-	return (prevmX, prevmY);
 
-	
+	return false;
 }

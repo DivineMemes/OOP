@@ -1,14 +1,19 @@
 #pragma once
 #include "gameObject.h"
+#include "bullet.h"
+
 class TheRealPlayer : public Gameobject
 {
 public:
 	TheRealPlayer();
+
+	Bullet bullet[20];
+
 	float x;
 	float y;
-	int radius;
+	float radius;
 	unsigned int TextureHandle;
-	virtual void update() override;
+	void update(MyMouse mouse);
 	virtual void draw() override;
 	void ThePlayerScreenWrap();
 	void ThePlayerControls();
