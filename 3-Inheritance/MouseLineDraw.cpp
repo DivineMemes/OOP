@@ -48,6 +48,15 @@ void MouseLineDraw::update(LineDrawer * lineARR, int size)
 		}
 		
 	}
+		if (sfw::getKey('U'))
+		{
+			for (int i = 0; i < size; i++)
+			{
+
+				lineARR[i].DrawThis == false;
+				std::cout << "U was pressed" << std::endl;
+			}
+		}
 
 }
 
@@ -60,7 +69,9 @@ void MouseLineDraw::FindNextLine(LineDrawer * lineARR, int size)
 		{
 			currentLine = &lineARR[i];
 		}
+		
 	}
+	
 	//Find one that has not been drawn
 
 	

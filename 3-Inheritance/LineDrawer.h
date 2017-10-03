@@ -10,6 +10,7 @@ public:
 	bool DrawThis = false;
 
 	void update();
+	void freedraw();
 	void draw();
 
 };

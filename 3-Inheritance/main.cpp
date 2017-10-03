@@ -29,7 +29,12 @@ int main()
 	meme.x = 400;
 	meme.y = 300;
 	
-	LineDrawer lines[500];
+	LineDrawer lines[1000];
+	LineDrawer pform;
+	pform.pos1X = 0;
+	pform.pos1Y = 10;
+	pform.pos2X = 800;
+	pform.pos2Y = 10;
 	MouseLineDraw mouse;
 	mouse.currentLine = &lines[0];
 	//BaseParticle particle;
@@ -40,7 +45,7 @@ int main()
 	
 	while(sfw::stepContext()) 
 	{
-		mouse.update(lines, 500);
+		mouse.update(lines, 1000);
 		//follow for follower
 		/*
 		followTime -= sfw::getDeltaTime();
@@ -65,14 +70,12 @@ int main()
 		MouseDrawPoint();
 		DrawMouse();
 		meme.ThePlayerScreenWrap();
-		
+		pform.freedraw();
 		
 
-		for (int i = 0; i < 500; i++)
+		for (int i = 0; i < 1000; i++)
 		{
 			lines[i].draw();
-
-			
 		}
 
 		//particle.draw();
