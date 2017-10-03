@@ -8,6 +8,9 @@
 #include <ctime>
 #include <cmath>
 #include "bullet.h"
+
+
+int score = 0;
 bool checkCollisionPE(TheRealPlayer& player, Enemy &enemy)
 {
 	// do some math in here to figure out if they are colliding
@@ -24,7 +27,7 @@ bool checkCollisionPE(TheRealPlayer& player, Enemy &enemy)
 		return false;
 	}
 }
-	bool checkCollisionBE(Bullet& bullet, Enemy &enemy)
+bool checkCollisionBE(Bullet& bullet, Enemy &enemy)
 	{
 		// do some math in here to figure out if they are colliding
 		float xSquaredBE = pow(bullet.xPos - enemy.posX, 2);
@@ -40,9 +43,6 @@ bool checkCollisionPE(TheRealPlayer& player, Enemy &enemy)
 			return false;
 		}
 	}
-	// return true if they are
-	// return false if they aren't
-
 bool notDead = true;
 int main()
 {
@@ -54,11 +54,7 @@ int main()
 	player.y = 300;
 	player.radius = 10;
 	MyMouse mouse;
-	/*Bullet bullets[20];
-	for(int i = 0; i < 20; ++i)
-	{ 
-		bullets[i].radius = 5;
-	}*/
+	
 	Enemy enemy;
 	enemy.posX = 100;
 	enemy.posY = 100;
@@ -85,13 +81,7 @@ int main()
 				army[i].enabled;
 				army[i].draw();
 			}
-			/*for (int i = 0; i < 20; ++i)
-			{
-				bullets[i].bulletUpdate(mouse, player);
-				bullets[i].bulletDraw(player);
-			}*/
-
-			//enemy.update(player);
+			
 			player.ThePlayerControls();
 			player.ThePlayerScreenWrap();
 			
@@ -103,8 +93,8 @@ int main()
 			player.draw();
 			player.update(mouse);
 			mouse.OnMouseDown();
-			//enemy.draw();
 
+			//enemy & player collision checks
 			for (int i = 0; i < 10; ++i)
 			{
 				if (army[i].enabled == true)
@@ -117,9 +107,10 @@ int main()
 
 					}
 				}
-				// did collision occur?
+				
 				
 			}
+			//bullet & enemy collision checks
 			for (int i = 0; i < 20; ++i)
 			{
 				if (player.bullet[i].enabled)

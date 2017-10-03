@@ -46,20 +46,17 @@ bool MyMouse::MouseIsDown()
 	{
 		action = true;
 		isDown = true;
-		//std::cout << "Button is held down" << std::endl;
 	}
 	else
 	{
 		isDown = false;
 		prevmX = sfw::getMouseX();
 		prevmY = sfw::getMouseY();
-		//std::cout << "Button is held up" << std::endl;
 	}
 
 
 	if (action == true && isDown == false)
 	{
-		std::cout << "Click";
 		return true;
 	}
 
