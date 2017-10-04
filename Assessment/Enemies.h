@@ -9,6 +9,8 @@ class Enemy : public Gameobject
 public:
 	float posX;
 	float posY;
+	float Xspeed;
+	float Yspeed;
 	int radius;
 	bool enabled = true;
 	virtual void update(TheRealPlayer& player);

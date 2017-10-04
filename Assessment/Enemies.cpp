@@ -8,19 +8,19 @@ void Enemy::update(TheRealPlayer& player)
 {
 	if (posX < player.x)
 	{
-		posX++ * sfw::getDeltaTime();
+		posX += Xspeed;
 	}
 	else if (posX > player.x)
 	{
-		posX-- * sfw::getDeltaTime();
+		posX -= Xspeed;
 	}
 	if (posY < player.y)
 	{
-		posY++ * sfw::getDeltaTime();
+		posY += Yspeed;
 	}
 	else if (posY > player.y)
 	{
-		posY-- * sfw::getDeltaTime();
+		posY -= Yspeed;
 	}
 }
 

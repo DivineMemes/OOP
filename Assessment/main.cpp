@@ -9,8 +9,8 @@
 #include <cmath>
 #include "bullet.h"
 
-
-int score = 0;
+std::fstream score;
+int Gamescore = 0;
 bool checkCollisionPE(TheRealPlayer& player, Enemy &enemy)
 {
 	// do some math in here to figure out if they are colliding
@@ -44,8 +44,31 @@ bool checkCollisionBE(Bullet& bullet, Enemy &enemy)
 		}
 	}
 bool notDead = true;
+int disableCount = 0;
 int main()
 {
+	score.open("score", std::ios::out | std::ios::in);
+
+	if (score.fail())
+	{
+		score.clear();
+
+		score.open("score", std::ios::out);
+	}
+	else
+	{
+		// read the value if it does
+		
+		score.seekp(0);
+	}
+
+	
+	std::string buffer;
+	while (std::getline(score, buffer))
+	{
+		std::cout << buffer << std::endl;
+	}
+	
 	srand(time(NULL));
 	sfw::initContext(800, 600, "WaveShot");
 	sfw::setBackgroundColor(BLACK);
@@ -65,12 +88,15 @@ int main()
 	{
 		army[i].posX = rand() % 800;
 		army[i].posY = rand() % 600;
+		army[i].Xspeed = 0.05 * sfw::getTime();
+		army[i].Yspeed = 0.05 * sfw::getTime();
 		army[i].radius = rand() % 36 + 3;
 	}
 	
 	
 	while (sfw::stepContext())
 	{
+		std::cout << disableCount << std::endl;
 		// update all the things!	
 		if (notDead)
 		{
@@ -78,13 +104,15 @@ int main()
 			for (int i = 0; i < 10; ++i)
 			{
 				army[i].update(player);
-				army[i].enabled;
+				//army[i].enabled = true;
 				army[i].draw();
+				army[i].Xspeed += 1 * 0.0005f;
+				army[i].Yspeed += 1 * 0.0005f;
 			}
 			
 			player.ThePlayerControls();
 			player.ThePlayerScreenWrap();
-			
+			Gamescore += sfw::getTime();
 			
 
 			// draw everything!
@@ -117,20 +145,48 @@ int main()
 				{
 					for (int j = 0; j < 10; ++j)
 					{
-						if (checkCollisionBE(player.bullet[i], army[j]))
+						if (army[j].enabled == true)
 						{
-							army[j].enabled = false;
+							if (checkCollisionBE(player.bullet[i], army[j]))
+							{
+								army[j].enabled = false;
+								disableCount++;
+								break;
+							}
 						}
 					}
+				}
+			}
+			
+			if (disableCount >= 10)
+			{
+				for (int i = 0; i < 10; ++i)
+				{
+					army[i].enabled = true;
+					army[i].posX = rand() % 800;
+					army[i].posY = rand() % 600;
+					army[i].Xspeed = 1 * sfw::getTime() / sfw::getTime() + 1;
+					army[i].Yspeed = 1 * sfw::getTime() / sfw::getTime() + 1;
+					army[i].radius = rand() % 36 + 3;
+					disableCount = 0;
 				}
 			}
 
 		}
 		else if (notDead == false)
 		{
+			score.clear();
+			score.seekp(0, std::ios_base::end);
+			score << std::endl << Gamescore;
+			score.flush();
+			score.close();
 			std::cout << "YOU LOSE" << std::endl;
+			exit(0);
 		}
 	}
-
-
+	score.clear();
+	score.seekp(0, std::ios_base::end);
+	score << std::endl << Gamescore;
+	score.flush();
+	score.close();
 }
