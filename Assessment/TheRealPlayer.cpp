@@ -2,6 +2,7 @@
 #include "sfwdraw.h"
 #include "Effects.h"
 #include <iostream>
+
 TheRealPlayer::TheRealPlayer()
 {
 	for (int i = 0; i < 20; i++)
@@ -70,20 +71,50 @@ void TheRealPlayer::ThePlayerScreenWrap()
 }
 void TheRealPlayer::ThePlayerControls()
 {
+	if (SprintTime < 0)
+	{
+		SprintTime = 0;
+	}
+	if (SprintTime > 2)
+	{
+		SprintTime = 2;
+	}
+	if (sfw::getKey(' ') && SprintTime > 0 )
+	{
+		speedX = 6;
+		speedY = 6;
+		SprintTime -= sfw::getDeltaTime();
+		//time --;
+		
+	}
+	else
+	{
+		SprintTime += sfw::getDeltaTime();
+		speedX = 2;
+		speedY = 2;
+	}
+
+
+
+
 	if (sfw::getKey('W'))
 	{
-		y += 2;
+		y += speedY;
+		
 	}
 	if (sfw::getKey('S'))
 	{
-		y -= 2;
+		y -= speedY;
+		
 	}
 	if (sfw::getKey('D'))
 	{
-		x += 2;
+		x += speedX;
+		
 	}
 	if (sfw::getKey('A'))
 	{
-		x -= 2;
+		x -= speedX;
+		
 	}
 }

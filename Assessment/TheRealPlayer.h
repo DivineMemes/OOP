@@ -11,7 +11,11 @@ public:
 
 	float x;
 	float y;
+	float speedX;
+	float speedY;
 	float radius;
+	float SprintTime;
+	//bool sprint = false;
 	void update(MyMouse mouse);
 	virtual void draw() override;
 	void ThePlayerScreenWrap();

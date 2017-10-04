@@ -75,6 +75,8 @@ int main()
 	TheRealPlayer player;
 	player.x = 400;
 	player.y = 300;
+	player.speedX = 2;
+	player.speedY = 2;
 	player.radius = 10;
 	MyMouse mouse;
 	
@@ -96,7 +98,7 @@ int main()
 	
 	while (sfw::stepContext())
 	{
-		std::cout << disableCount << std::endl;
+		//std::cout << disableCount << std::endl;
 		// update all the things!	
 		if (notDead)
 		{
